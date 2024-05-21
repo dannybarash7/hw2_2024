@@ -65,26 +65,28 @@ query parameters, please read the relevant docs.
 ### Github 
 Hw1 will be submitted via Github. If you don't have a user, please create one with your BGU email address.
 
-## Starting
-### Init a new repository, or clone 
-```bash
-git https://github.com/bgu-frontend/hw1_2024
-```
+## Main steps
+### Init a new repository, or clone this one.
 
 ### Start a new react project using create-next-app 
 See [here](https://nextjs.org/docs/app/api-reference/create-next-app).
 
-### Install the server locally
+### Install json-server locally
 ```bash
 npm install json-server
 ```
+### Create and seed the database
+Create a script (not going to be tested) that creates a JSON file with a number of posts given by an input N. Use it to initialize a JSON file called "./data/notes.json."
+
 ### Run the server with an input JSON file:
 ```bash
 npx json-server --port 3001 --watch ./data/notes.json
 ```
 
-### Create and seed the database
-Create a script (not going to be tested) that creates a JSON file with a number of posts given by an input N. Use it to initialize a JSON file called "./data/notes.json."
+### Run your code:
+```bash
+npm run dev
+```
 
 
 ## The task
