@@ -12,12 +12,12 @@ We will implement a simple front-end app that shows user posts. The app uses jso
 3. Your submitted git repo should be *private*, please make barashd@post.bgu.ac.il and nitzanlevy (github username) collaborators.
 4. Do not use external libraries that provide the pagination component. If in doubt, contact the course staff.
 5. Deadline: 11.6.24, end of day.
-6. Additionally, solve the [theoretical questions](https://forms.gle/cot96vDYK6HEAQyB7).
+6. Additionally, solve the [theoretical questions](https://forms.gle/zGDQF3DcPaA6iqCw6).
 7. Fill in repository details in (Moodle's "הגשה מטלה 1").
 8. The code will be written in typescript.
 
 ## AI
-Recommendation about using an AI assistant: Think about it as your friend for class: You can ask questions and read the answers, but never copy them. Understand the details but write the code from memory: copying from might be seen as plagiarism, see below.
+Recommendation about using an AI assistant: Think about it as your friend for class: You can ask questions and read the answers, but never copy them. Understand the details but write the code from memory: copying will be considered plagiarism, if two people copied the same AI code.
 
 ## Plagiarism
 1. We use a plagiarism detector.
