@@ -65,20 +65,24 @@ query parameters, please read the relevant docs.
 ### Github 
 Hw1 will be submitted via Github. If you don't have a user, please create one with your BGU email address.
 
-### Clone the project
+## Starting
+### Init a new repository, or clone 
 ```bash
-git clone git@github.com:bgu-frontend/hw1-posts.git
+git https://github.com/bgu-frontend/hw1_2024
 ```
+
+### Start a new react project using create-next-app 
+See [here](https://nextjs.org/docs/app/api-reference/create-next-app).
+
 ### Install the server locally
 ```bash
 npm install json-server
 ```
-
 ### Run the server with an input JSON file:
-
 ```bash
 npx json-server --port 3001 --watch ./data/notes.json
 ```
+
 ### Create and seed the database
 Create a script (not going to be tested) that creates a JSON file with a number of posts given by an input N. Use it to initialize a JSON file called "./data/notes.json."
 
@@ -123,8 +127,6 @@ Create a script (not going to be tested) that creates a JSON file with a number 
 3. Start the server with a JSON file. It will always contain at least one post.
     1. `npx json-server --port 3001 ./data/notes.json`
 4. Run tests.
-5. Check code.
-
 
 ### Example HTML
 ```
