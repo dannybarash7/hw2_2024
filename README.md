@@ -68,7 +68,7 @@ Hw1 will be submitted via Github. If you don't have a user, please create one wi
 ## Main steps
 ### Init a new repository, or clone this one.
 
-### Start a new react project using create-next-app 
+### Start a new react project using create-next-app, use the default settings.
 See [here](https://nextjs.org/docs/app/api-reference/create-next-app).
 
 ### Install json-server locally
