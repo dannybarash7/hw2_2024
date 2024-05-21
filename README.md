@@ -1,7 +1,7 @@
 ## Introduction
-We will implement a simple front-end app that shows user posts. The app uses json-server, which uses a JSON file as a post database and displays them to the user, split into pages.
+We will implement a simple front-end app that shows user posts. The app uses a JSON server, which uses a JSON file as a post database and displays the posts to the user, split into pages.
 
-1. A JSON server is initialized using a JSON file, which will hold the posts. The JSON file is initially small, but you will replace it with your own, much larger, JSON file.
+1. A JSON server is initialized using a JSON file to hold the posts. The JSON file is initially small, but you will replace it with your own, much larger, JSON file.
 2. The client sees the posts split into pages: 10 posts at a page. Initially, only the first page is shown to the user.
 3. The UI component used is called pagination. 
 4. When a specific page loads, only the messages of that page will be sent from the server for obvious efficiency reasons.
@@ -14,10 +14,10 @@ We will implement a simple front-end app that shows user posts. The app uses jso
 5. Deadline: 11.6.24, end of day.
 6. Additionally, solve the [theoretical questions](https://forms.gle/zGDQF3DcPaA6iqCw6).
 7. Fill in repository details in (Moodle's "הגשה מטלה 1").
-8. The code will be written in typescript.
+8. Use Typescript.
 
 ## AI
-Recommendation about using an AI assistant: Think about it as your friend for class: You can ask questions and read the answers, but never copy them. Understand the details but write the code from memory: copying will be considered plagiarism, if two people copied the same AI code.
+Recommendation about using an AI assistant: You can ask questions and read the answers, but never copy them. Understand the details but write the code from memory. If two people copy the same AI code, it will be considered plagiarism.
 
 ## Plagiarism
 1. We use a plagiarism detector.
@@ -26,16 +26,16 @@ Recommendation about using an AI assistant: Think about it as your friend for cl
 
 ### Github 
 Hw1 will be submitted via Github. Please open a user with your email address.
-To securely update files from your machine by ssh authentication:
+To securely update files from your machine by SSH authentication:
 https://docs.github.com/en/authentication/connecting-to-github-with-ssh/checking-for-existing-ssh-keys 
 
-or using OAuth:
+Or using OAuth:
 https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
 
 
 ## Prerequisites
 ### Tools
-1. Chrome browser (comes with DevTools built in).
+1. Chrome browser (comes with DevTools built-in).
 2. Visual Studio Code
 3. Optional: Visual Studio Code [debugger](https://code.visualstudio.com/docs/)
 3. [Next.js](https://nextjs.org/docs/getting-started/installation)
@@ -48,7 +48,7 @@ https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/c
 4. push
 
 HW1 will be submitted via Github.
-To securely update files from your machine by ssh authentication:
+To securely update files from your machine by SSH authentication:
 https://docs.github.com/en/authentication/connecting-to-github-with-ssh/checking-for-existing-ssh-keys 
 
 ### Json server
@@ -65,18 +65,17 @@ query parameters, please read the relevant docs.
 ### Github 
 Hw1 will be submitted via Github. If you don't have a user, please create one with your BGU email address.
 
-## Main steps
-### Init a new repository, or clone this one.
-
-### Start a new react project using create-next-app, use the default settings.
+## Starting a new project:
+1. Initiate a new repository or clone this one.
+2. Start a new react project using create-next-app and use the default settings.
 See [here](https://nextjs.org/docs/app/api-reference/create-next-app).
-
-### Install json-server locally
+3. Install json-server locally
 ```bash
 npm install json-server
 ```
-### Create and seed the database
-Create a script (not going to be tested) that creates a JSON file with a number of posts given by an input N. Use it to initialize a JSON file called "./data/notes.json."
+4. Create and seed the database
+Recommendation: Create a script that creates a JSON file with the number of posts given by an input N in the same format as 'notes.json.'
+Use it to initialize a JSON file in, e.g., "./data/notes.json."
 
 ### Run the server with an input JSON file:
 ```bash
@@ -87,26 +86,25 @@ npx json-server --port 3001 --watch ./data/notes.json
 ```bash
 npm run dev
 ```
+## Front end Description:
+1. The front-end should connect to the server, and get posts (just) for the current page.
+2. Each page has 10 posts.
+3. add [pagination](https://www.w3schools.com/css/css3_pagination.asp) UI element to the website. 
 
-
-## The task
-1. Connect to the server: get posts (just) for the current page. Show 10 posts on each page.
-2. add [pagination](https://www.w3schools.com/css/css3_pagination.asp) to the website. 
-
-### Implementation
+## Suggested implementation steps:
 1. Show a list of posts (tip: start from a local variable holding the post list.)
 2. Connect to the server: (tip: start by getting all posts.)
-3. Add pagination in the UI.
-4. Optimize: when rendering a page, send only the data needed now.
+3. Add pagination in the UI (tip: plan the component tree). 
+4. Optimize: when rendering a page, send only the data needed now instead of the entire database.
 
 ## Pagination
 1. The minimum number of page buttons is 1.
 2. The maximum number of page buttons is 5.
 3. The first page is 1.
 4. The Active page button is shown in bold.
-5. Which page numbers to show on the buttons? Let `a` be the current page. 
+5. Which page numbers should be shown on the buttons? Let `a` be the current page. 
     1. If there are <=5 total pages, show all.
-    2. If there are >=6 total pages: assume there are 10 ( but implement for any number of pages):
+    2. If there are >=6 total pages, assume there are 10 ( but implement for any number of pages):
         1. if `a <3` : show buttons `[1,2,3,4,5]`
         2. if `3 <= a <= 8` : show buttons `[a-2,a-1,a,a+1,a+2]`
         3. if `a > 8`: show buttons `[6,7,8,9,10]`
@@ -153,8 +151,5 @@ npm run dev
     <button name="last">Last</button>
 </div>
 ```
-
-
-
 ## Good luck!
 
