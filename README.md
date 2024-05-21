@@ -91,7 +91,7 @@ Create a script (not going to be tested) that creates a JSON file with a number 
 1. Show a list of posts (tip: start from a local variable holding the post list.)
 2. Connect to the server: (tip: start by getting all posts.)
 3. Add pagination in the UI.
-4. Optimize: when rendering a page, send only the data needed now. (tip: use [_page]() route in json_server API)
+4. Optimize: when rendering a page, send only the data needed now.
 
 ## Pagination
 1. The minimum number of page buttons is 1.
