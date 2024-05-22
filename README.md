@@ -15,6 +15,7 @@ We will implement a simple front-end app that shows user posts. The app uses a J
 6. Additionally, solve the [theoretical questions](https://forms.gle/zGDQF3DcPaA6iqCw6).
 7. Fill in repository details in (Moodle's "הגשה מטלה 1").
 8. Use Typescript.
+9. The ex1 forum is open for questions in Moodle.
 
 ## AI
 Recommendation about using an AI assistant: You can ask questions and read the answers, but never copy them. Understand the details but write the code from memory. If two people copy the same AI code, it will be considered plagiarism.
@@ -29,9 +30,6 @@ Hw1 will be submitted via Github. Please open a user with your email address.
 To securely update files from your machine by SSH authentication:
 https://docs.github.com/en/authentication/connecting-to-github-with-ssh/checking-for-existing-ssh-keys 
 
-Or using OAuth:
-https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
-
 
 ## Prerequisites
 ### Tools
@@ -41,26 +39,28 @@ https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/c
 3. [Next.js](https://nextjs.org/docs/getting-started/installation)
 4. Git (Start here: [Atlassian](https://www.atlassian.com/git/tutorials/))
 
-### Git
+### Git - useful to know
 1. clone
 2. add
 3. commit
 4. push
 
-HW1 will be submitted via Github.
-To securely update files from your machine by SSH authentication:
-https://docs.github.com/en/authentication/connecting-to-github-with-ssh/checking-for-existing-ssh-keys 
+### Json server - example code
+In the following, `active_page` is the currently displayed page, and `POSTS_PER_PAGE` is 10.
+```js
+    const NOTES_URL = 'http://localhost:3001/notes';
+    const query_string = '?_page='+active_page+'&_per_page='+POSTS_PER_PAGE+'&_limit='+POSTS_PER_PAGE;
 
-### Json server
-Read how to take some/all messages from the server.
+    useEffect(() => {
+        const promise = axios.get(NOTES_URL + query_string);
+        promise.then(response => { 
+            // fill
+        }).catch(error => { console.log("Encountered an error:" + error)});
+    }, []);
+```
+
+See:
 https://www.npmjs.com/package/json-server
-For pagination, you'll need request:
-```
-_page
-_per_page
-_limit
-```
-query parameters, please read the relevant docs.
 
 ### Github 
 Hw1 will be submitted via Github. If you don't have a user, please create one with your BGU email address.
@@ -151,5 +151,8 @@ npm run dev
     <button name="last">Last</button>
 </div>
 ```
+
+
+
 ## Good luck!
 
