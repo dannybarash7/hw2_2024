@@ -46,17 +46,18 @@ https://docs.github.com/en/authentication/connecting-to-github-with-ssh/checking
 4. push
 
 ### Json server - example code
-In the following, `active_page` is the currently displayed page, and `POSTS_PER_PAGE` is 10.
+In the following, `active_page` is the currently displayed page, and `POSTS_PER_PAGE` is 10, 'notes_url' is 'http://localhost:3001/notes'.
 ```js
-    const NOTES_URL = 'http://localhost:3001/notes';
-    const query_string = '?_page='+active_page+'&_per_page='+POSTS_PER_PAGE+'&_limit='+POSTS_PER_PAGE;
-
     useEffect(() => {
-        const promise = axios.get(NOTES_URL + query_string);
+        const promise = axios.get(NOTES_URL, {
+            params: {
+              _page: activePage,
+              _per_page: POSTS_PER_PAGE
+            }});
         promise.then(response => { 
             // fill
         }).catch(error => { console.log("Encountered an error:" + error)});
-    }, []);
+    });
 ```
 
 See:
@@ -71,7 +72,7 @@ Hw1 will be submitted via Github. If you don't have a user, please create one wi
 See [here](https://nextjs.org/docs/app/api-reference/create-next-app).
 3. Install json-server locally
 ```bash
-npm install json-server
+npm install json-server@0.17.4
 ```
 4. Create and seed the database
 Recommendation: Create a script that creates a JSON file with the number of posts given by an input N in the same format as 'notes.json.'
