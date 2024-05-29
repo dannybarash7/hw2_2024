@@ -104,7 +104,7 @@ npm run dev
 3. The first page is 1.
 4. The Active page button is shown in bold.
 5. Which page numbers should be shown on the buttons? Let `a` be the current page. 
-    1. If there are <=5 total pages, show all.
+    1. If there are <=5 total pages, show buttons [1, ..., , #Num_pages].
     2. If there are >=6 total pages, assume there are 10 ( but implement for any number of pages):
         1. if `a <3` : show buttons `[1,2,3,4,5]`
         2. if `3 <= a <= 8` : show buttons `[a-2,a-1,a,a+1,a+2]`
