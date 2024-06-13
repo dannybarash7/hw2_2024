@@ -1,172 +1,134 @@
 ## Introduction
-We will implement a simple front-end app that shows user posts. The app uses a JSON server, which uses a JSON file as a post database and displays the posts to the user, split into pages.
+We will continue from hw1, the previous website. This task's main goal is to write a backend server instead of the json-server in hw1.
 
-1. A JSON server is initialized using a JSON file to hold the posts. The JSON file is initially small, but you will replace it with your own, much larger, JSON file.
-2. The client sees the posts split into pages: 10 posts at a page. Initially, only the first page is shown to the user.
-3. The UI component used is called pagination. 
-4. When a specific page loads, only the messages of that page will be sent from the server for obvious efficiency reasons.
+1. We will use a mongo database service from Atlas.
+2. The database will hold the notes data.
+3. We will use Express to implement the backend, which will support fetching messages, add, delete, and remove routes.
+4. implement a logger middleware.
+5. Most of the material can be found in [Full Stack Open- part 3](https://fullstackopen.com/en/part3).
+6. In hw1, I interchangibly used 'note' and 'post' by mistake. As a result, many people use as json server input '/posts.json' instead of '/notes.json', so we changed the tests to fit both. From hw2 on, we'll align on 'note'. please change the html names of the buttons, and in other places from 'post' to 'note'. 
 
 ## Submission
 1. Submission is in pairs, but starting alone is better for practice.
 2. Coding: 70%, Questions: 30%.
 3. Your submitted git repo should be *private*, please make barashd@post.bgu.ac.il and nitzanlevy (github username) collaborators.
 4. Do not use external libraries that provide the pagination component. If in doubt, contact the course staff.
-5. Deadline: 11.6.24, end of day.
-6. Additionally, solve the [theoretical questions](https://forms.gle/zGDQF3DcPaA6iqCw6).
-7. Fill in repository details in (Moodle's "הגשה מטלה 1").
+5. Deadline: 30.6.24, end of day.
+6. Additionally, solve the [theoretical questions](https://forms.gle/r4gVbb16KKNjmW1e8).
+7. Fill in repository details in (Moodle's "הגשה מטלה 2").
 8. Use Typescript.
-9. The ex1 forum is open for questions in Moodle.
+9. The ex2 forum is open for questions in Moodle.
 10. Git repository content:
     1. Aim for a minimal repository size that can be cloned and installed:  most of the files in github should be code and package dependencies (package.json).
-    2. Don't submit node_modules dir, .next project dir, json creation script, or json files.
-11. If a certain case is not described here, you're free to code it as you see fit.
-
-## Code
-1. We haven't got to server side coding yet, in the meanwhile, you should add
-    ```js
-      "use client";
-    ```
-    to your topmost component, to signal react that this component tree is rendered by the client: [link](https://react.dev/reference/rsc/use-client) 
-2. Won't be tested: aim for short components, there's no hard rule of how many. See [this discussion](https://stackoverflow.com/questions/75380858/how-to-deal-with-a-huge-number-of-components-in-a-page-in-react#:~:text=After%20a%20few%20years%20working,ll%20be%20hard%20to%20read.).
-3. Won't be tested: see Airbnb's [coding style document](https://airbnb.io/javascript/react/).
+    2. Don't submit node_modules dir, .next project dir, json creation script, .env file, or json files.
+11. If a certain use case is not described here, you're free to code it as you see fit.
 
 ## AI
-Recommendation about using an AI assistant: You can ask questions and read the answers, but never copy them. Understand the details but write the code from memory. If two people copy the same AI code, it will be considered plagiarism.
+Recommendation about using an AI assistant: You can ask questions and read the answers, but never copy them. Understand the details but write the code yourself. If two people copy the same AI code, it will be considered plagiarism.
 
 ## Plagiarism
 1. We use a plagiarism detector.
 2. The person who copies and the person who was copied from are both responsible. Set your repository private, and don't share your code.
 
 
-### Github 
-Hw1 will be submitted via Github. Please open a user with your email address.
-To securely update files from your machine by SSH authentication:
-https://docs.github.com/en/authentication/connecting-to-github-with-ssh/checking-for-existing-ssh-keys 
+## Code
+1. Please put the previous code in a subdirectory called "frontend" and create a new directory called "backend", you can use the same github link.
+2. As before, we will run the frontend on port 3000 and the backend on port 3001.
 
+4. The backend will have a middleware logger for the incoming and outgoing messages, the log is a file called "log.txt".
+5. .env file will be used to define your environemnt variables:
+    1. Atlas connection string: you'll use your own, and the tests would use a new .env file.
+
+### Github 
+As before, Hw2 will be submitted via Github.
 
 ## Prerequisites
 ### Tools
-1. Chrome browser (comes with DevTools built-in).
-2. Visual Studio Code
-3. Optional: Visual Studio Code [debugger](https://code.visualstudio.com/docs/)
-3. [Next.js](https://nextjs.org/docs/getting-started/installation)
-4. Git (Start here: [Atlassian](https://www.atlassian.com/git/tutorials/))
+The hw1 tools, plus:
+1. Enable requests between the frontend and backend, by using cors in the backend: [CORS](https://fullstackopen.com/en/part3/deploying_app_to_internet#same-origin-policy-and-cors)
+2. Read local .env file: [dotenv](https://www.npmjs.com/package/dotenv)
+3. Backend use Mongoose to query the database. [mongoose](https://mongoosejs.com/docs/index.html)
+4. Use nodemon to rerun the backend automatically when the source file changes. [nodemon](https://www.npmjs.com/package/nodemon)
+5. Refresh: read about [await/async](https://javascript.info/async-await)
+6. What is [express](https://expressjs.com)
 
-### Git - useful to know
-1. clone
-2. add
-3. commit
-4. push
+## Initialize a mongo server
+1. We will use mongo database to store the notes. It can be local on your machine, or external. This task will use the external.
+2. We will follow the example from [Saving data to MongoDB- MongoDB](https://fullstackopen.com/en/part3/saving_data_to_mongo_db#mongo-db). 
+3. Open a free account and initialize a new database in Atlas.
 
-### Json server - example code
-In the following, `active_page` is the currently displayed page, and `POSTS_PER_PAGE` is 10, 'notes_url' is 'http://localhost:3001/notes'.
-```js
-    useEffect(() => {
-        const promise = axios.get(NOTES_URL, {
-            params: {
-              _page: activePage,
-              _per_page: POSTS_PER_PAGE
-            }});
-        promise.then(response => { 
-            // fill
-        }).catch(error => { console.log("Encountered an error:" + error)});
-    });
+## Frontend Description:
+1. The front-end should connect to the backend with axios http requests.
+2. The UI will have buttons (see backend section for routes description):
+    1. For each note, add an edit button: replaces the note's content with an editable test, initalized with the note's current content.
+    2. For each note, add a delete button.
+    2. One "add new note" button.
+3. Like before, each page has 10 notes. Backend is now responsible to fetch only 10 at a time.
+
+## backend Description:
+1. The front-end should connect to the backend with axios http requests.
+2. The UI will have buttons (see backend section for routes description):
+    1. For each note, add an edit button: replaces the note's content with an editable test, initalized with the note's current content.
+    2. For each note, add a delete button.
+    2. One "add new note" button.
+3. Like before, each page has 10 notes. Please use Mongoose's pagination API.
+
+
+## middleware Description:
+1. The backend should use dotenv to read the ".env" file. It will contain "MONGODB_CONNECTION_URL = '...'", which will be used by mongoose.
+2. Routes:
+    1. Get all notes, HTTP GET request to '/notes'.
+    2. Get the i'th note, GET request to '/notes/[i]'. (For example, http://localhost:3001/notes/1)
+    3. Create a new note, POST request to '/notes'.
+    4. Update the i'th note, PUT request to 'notes/[i]'.
+    5. Delete the i'th note, DELETE request to 'notes/[i]'.
+
+## atlas Description:
+1. Like before, the destination mongodb will always contain at least one note.
+2. Like in the full stack course, the collection name is `notes`, and the schema will match the `note structure`:
+```
+{
+  id: number;
+  title: string;
+  author: {
+    name: string;
+    email: string;
+  } | null;
+  content: string;
+};
 ```
 
-See:
-https://www.npmjs.com/package/json-server
-
-### Github 
-Hw1 will be submitted via Github. If you don't have a user, please create one with your BGU email address.
-
-## Starting a new project:
-1. Initiate a new repository or clone this one.
-2. Start a new react project using create-next-app and use the default settings.
-See [here](https://nextjs.org/docs/app/api-reference/create-next-app).
-3. Install json-server locally
-```bash
-npm install json-server@0.17.4
-```
-4. Create and seed the database
-Recommendation: Create a script that creates a JSON file with the number of posts given by an input N in the same format as 'notes.json.'
-Use it to initialize a JSON file in, e.g., "./data/notes.json."
-
-### Run the server with an input JSON file:
-```bash
-npx json-server --port 3001 --watch ./data/notes.json
-```
-
-### Run your code:
-```bash
-npm run dev
-```
-## Front end Description:
-1. The front-end should connect to the server, and get posts (just) for the current page.
-2. Each page has 10 posts.
-3. add [pagination](https://www.w3schools.com/css/css3_pagination.asp) UI element to the website. 
-
-## Suggested implementation steps:
-1. Show a list of posts (tip: start from a local variable holding the post list.)
-2. Connect to the server: (tip: start by getting all posts.)
-3. Add pagination in the UI (tip: plan the component tree). 
-4. Optimize: when rendering a page, send only the data needed now instead of the entire database.
-
-## Pagination
-1. The minimum number of page buttons is 1.
-2. The maximum number of page buttons is 5.
-3. The first page is 1.
-4. The Active page button is shown in bold.
-5. The 4 buttons with "First, Prev, Next, Last" text on them always appear.
-6. Which page numbers should be shown on the buttons? Let `a` be the current page. 
-    1. If there are <=5 total pages, show buttons [1, ..., , #Num_pages].
-    2. If there are >=6 total pages, assume there are 10 ( but implement for any number of pages):
-        1. if `a <3` : show buttons `[1,2,3,4,5]`
-        2. if `3 <= a <= 8` : show buttons `[a-2,a-1,a,a+1,a+2]`
-        3. if `a > 8`: show buttons `[6,7,8,9,10]`
-    
-
+3. Read and use the following error codes: [HTTP response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
+    1. Unknown route/note number: 404
+    2. Generic error response, cannot delete/update note : 500
+    4. Missing fields in the request: 400.
+    5. Success codes:
+        1. Saved note: 201.
+        2. Deleted note: 204.
+        3. Other: 200.
 
 ## Checking the coding task:
 
-## Test requirements
-1. Each post should be of [class name](https://www.w3schools.com/html/html_classes.asp) **"post"**.
-2. A post must get the unique ID from the database and use it as the [html id attribute](https://www.w3schools.com/html/html_id.asp).
+## Test requirements- hw1
+1. Each note should be of [class name](https://www.w3schools.com/html/html_classes.asp) **"note"**. (And not note)
+2. A note must get the unique ID from the database and use it as the [html id attribute](https://www.w3schools.com/html/html_id.asp).
 3. Pagination buttons:
     1. Navigation buttons should be with [html name attribute](https://www.w3schools.com/tags/att_name.asp) **"first"**, **"previous"**, **"next"**, **"last"**.
     2. Page buttons should be with the [html name attribute](https://www.w3schools.com/tags/att_name.asp) **"page-<target_page_number>"**
 
+## Test requirements- hw2
+1. [html name attributes](https://www.w3schools.com/tags/att_name.asp):
+    1. Per note `Edit`/`Delete` buttons should have **"delete-<note_id>"**, **"edit-<note_id>"**
+    2. `Add new note` button should have **"add-note"**.
+
 ### The tester will:
-1. Clone and install your submitted GitHub repository.
-    1. `git clone <your_submitted_github_repo>`
-    2. `npm install` (package.json should exist)
-    3. `npm run dev` (configured to default port 3000)
-3. Start the server with a JSON file. It will always contain at least one post.
-    1. `npx json-server --port 3001 ./data/notes.json`
-4. Run tests.
-
-### Example HTML
-```
-<div class="post" id="1">
-    <h2>Note 1</h2>
-    <small>By Author 1</small>
-    <br>
-    Content for note 1
-</div>
-```
-
-```
-<div>
-    <button name="first">First</button>
-    <button name="previous">Previous</button>
-    <button name="page-1">1</button>
-    <button name="page-2">2</button>
-    <button name="page-3">3</button>
-    <button name="page-4">4</button>
-    <button name="page-5">5</button>
-    <button name="next">Next</button>
-    <button name="last">Last</button>
-</div>
-```
+1. `git clone <your_submitted_github_repo>`
+2. `npm install` from the `frontend` dir (package.json should exist)
+3. `npm run dev` from the `frontend` dir  (configured to default port 3000)
+3. Copy a `.env` file into the `backend` dir.
+4. `npm install` from the `backend` dir (package.json should exist)
+5. `node index.js` from the `backend` dir (configured to default port 3001)
+6. Run tests.
 
 
 
