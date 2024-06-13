@@ -66,15 +66,6 @@ The hw1 tools, plus:
 3. Like before, each page has ten notes. The backend is now responsible for fetching only ten at a time.
 
 ## Backend Description:
-1. The front end should connect to the backend with Axios HTTP requests.
-2. The UI will have buttons (see backend section for routes description):
-    1. add an edit button for each note: Replace the content with an editable test initialized with the note's current content.
-    2. For each note, add a delete button.
-    2. One "add new note" button.
-3. Like before, each page has ten notes. Please use Mongoose's pagination API.
-
-
-## middleware Description:
 1. The backend should use dotenv to read the ".env" file. It will contain "MONGODB_CONNECTION_URL = '...'", which Mongoose will use.
 2. Routes:
     1. Get all notes, HTTP GET request to '/notes.'
@@ -82,6 +73,16 @@ The hw1 tools, plus:
     3. Create a new note POST request to '/notes.'
     4. Update the i'th note, PUT request to 'notes/[i].'
     5. Delete the i'th note, DELETE request to 'notes/[i].'
+
+
+## middleware Description:
+1. The middleware should log the method, path and body, in the following format:
+```js
+const requestLogger = (request, response, next) => {
+  `Method: ${request.method}\nPath: ${request.path}\nBody: ${JSON.stringify(request.body)}\n---\n`;
+  ...
+}
+```
 
 ## Atlas Description:
 1. Like before, the destination Mongodb will always contain at least one note.
